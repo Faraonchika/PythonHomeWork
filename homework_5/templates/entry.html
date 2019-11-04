@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{% if length == 0 %}
+<head>
+    <meta charset="UTF-8">
+    <title>Статья не найдена!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+Статья не найдена!
+</body>
+
+{% else %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article['title'] }} - Тренировочный блог</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<a class="btn btn-outline-primary" href="{{ url_for('index_page') }}">На главную</a>
+<br>
+<br>
+<h3>{{ article['title'] }}</h3><br>
+<h6><em>{{ article['text'] }}</em></h6><br>
+<br>
+<br>
+<br>
+<h3>Comments:</h3>
+__________________________________________________________________________________<br>
+{% for comment in article['comments'] %}
+    <strong>{{ comment['name']}}</strong><br>
+    <em>{{ comment['text']}}</em><br>
+    __________________________________________________________________________________<br>
+{% endfor %}
+<br>
+Добавление коментария:<br>
+<br>
+<form action="" method="POST">
+    Имя:
+    <input type="text" name="name"><br>
+    <br>
+    Текст:
+    <input type="text" name="text"><br>
+    <span style="color: red">{{ error1 }}</span>
+    <br>
+    <button type="submit">Добавить коментарий</button><br>
+</form>
+</body>
+{% endif %}
+</html>

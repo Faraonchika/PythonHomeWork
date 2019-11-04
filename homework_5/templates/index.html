@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Тренировочный блог</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <h1>Тренировочный блог</h1>
+    <form action="" method="POST">
+        Поиск по названию статьи:
+        <input type="text" name="name">
+                Сортировка:
+    <select name="operation">
+        <option selected value="no">Нет</option>
+        <option value="name">По названию</option>
+        <option value="dateD">По дате убывающая</option>
+        <option value="dateI">По дате возрастающая</option>
+    </select>
+        <button type="submit">Применить</button><br>
+    </form>
+
+    __________________________________________________________________________________<br>
+    {% for ENTRY in BLOG_ENTRIES %}
+    Название статьи: <a href="{{ url_for('entry_page', key=ENTRY['key']) }}">{{ ENTRY['title']}}</a><br>
+    Время создания: {{ ENTRY['created_at']}}<br>
+    {% if ENTRY['comments']|length == 0 %}
+    Нет коментариев<br>
+    {% else %}
+    Количество коментариев: {{ ENTRY['comments']|length }}<br>
+    {% endif %}
+    __________________________________________________________________________________<br>
+    {% endfor %}
+
+    <a class="btn btn-outline-primary" href="{{ url_for('create_entry_page') }}">Добавить новую статью</a>
+</div>
+</body>
+</html>
