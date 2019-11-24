@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать статью - Тренировочный блог</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<a class="btn btn-outline-primary" href="{{ url_for('index_page') }}">На главную</a>
+<br>
+<br>
+<h1>Создание новой статьи</h1><br>
+<br>
+<form action="" method="POST">
+    Название статьи:<br>
+    <input type="text" name="name"><br>
+    <br>
+    Текст статьи:<br>
+    <input type="text" name="article" size=""><br>
+    <span style="color: red">{{ error }}</span>
+    <br>
+    <br>
+    <button type="submit">Отправить!</button><br>
+</form><br>
+</body>
+</html>
