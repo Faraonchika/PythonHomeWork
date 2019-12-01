@@ -66,24 +66,27 @@ def download(path):
         ufr = requests.get(url)
         f.write(ufr.content)
         f.close()
+    if r2.status_code == 202:
+        print("Файл успешно загружен")
 
 
 @todo.command()
 @click.argument('path')
 def make_folder(path):
     params = {"path": path}
-    requests.put(address + '/v1/disk/resources', headers=headers, params=params)
+    r2 = requests.put(address + '/v1/disk/resources', headers=headers, params=params)
+    if r2.status_code == 202:
+        print("Папка успешно создана")
 
 
 @todo.command()
 @click.argument('path')
 @click.argument('link')
 def upload_post(path, link):
-    data = {"url": link,
-            "path": path + '/' + link.split('\\')[-1]
-            }
-    r = requests.post(address + '/v1/disk/resources/upload', headers=headers, json=data)
-    print(r.text)
+    params = {"url": link, "path": path + '/' + link.split('/')[-1]}
+    r = requests.post(address + '/v1/disk/resources/upload', headers=headers, params=params)
+    if r.status_code == 202:
+        print("Файл успешно загружен")
 
 
 @todo.command()
@@ -98,6 +101,8 @@ def upload_get(path, url):
             print("Файл с таким именем уже существует, либо указана несуществующая директория на диске!")
         else:
             requests.put(r.json()['href'], headers=headers, data=file)
+        if r.status_code == 202:
+            print("Файл успешно загружен")
     except FileNotFoundError:
         print("Такого файла не существует в заданной директории!")
 
